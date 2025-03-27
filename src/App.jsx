@@ -25,35 +25,23 @@ function App() {
   }
   return (
     <div className='container'>
-      {
-        movieList.map((movie, i) => {
-          return (
-            <div key={`movie-${i}`}>
-              <div>
-                {movie.title}
-              </div>
-              <div>
-                {movie.genre}
-              </div>
-            </div>
-          )
-        })
-      }
-      <label htmlFor="genres">chose a genre</label>
-      <select name='movies-genre' id="movies-genre" onChange={e => setMovieGenre(e.target.value)}>
-        {
-          genres.map((genre, i) => {
-            return (
-              <option key={i} value={genre}>{genre}</option>
-            )
-          })
-        }
-      </select>
-      <div>
-        <input type="text" name="movie-title" id="movie-title" placeholder='search-bar' onChange={e => setMovieName(e.target.value)} />
+      <div className='genre-container'>
+        <label htmlFor="genres">chose a genre</label>
+        <select name='movies-genre' id="movies-genre" className="text-center" onChange={e => setMovieGenre(e.target.value)}>
+          {
+            genres.map((genre, i) => {
+              return (
+                <option key={i} value={genre}>{genre}</option>
+              )
+            })
+          }
+        </select>
+      </div>
+      <div className='tool-container'>
+        <input type="text" name="movie-title" id="movie-title" className="p-1 text-center" placeholder='search-bar' onChange={e => setMovieName(e.target.value)} />
         <form onSubmit={e => newMovieHandler(e)} >
-          <input type="text" name="movie" id="movie" placeholder='add a new movie' onChange={e => setNewMovie(e.target.value)} />
-          <select name='movie-genre' id="movie-genre" onChange={e => setNewGenre(e.target.value)}>
+          <input type="text" name="movie" id="movie" className="p-1 text-center" placeholder='add a new movie' onChange={e => setNewMovie(e.target.value)} />
+          <select name='movie-genre' id="movie-genre" className="p-1 text-center" onChange={e => setNewGenre(e.target.value)}>
             {
               genres.map((genre, i) => {
                 return (
@@ -62,8 +50,26 @@ function App() {
               })
             }
           </select>
-          <button type="submit">submit</button>
+          <button type="submit" className="p-1 text-center">submit</button>
         </form>
+      </div>
+
+      <div className="displayer row">
+        {
+          movieList.map((movie, i) => {
+            return (
+              <div className="card col-4" key={`movie-${i}`}>
+                <div className="card-head">
+                  {movie.title}
+                </div>
+                <div className="card-body">
+                  {movie.genre}
+                  <img src={`${movie.img}`} alt="" />
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
     </div>
   )

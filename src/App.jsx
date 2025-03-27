@@ -22,6 +22,7 @@ function App() {
     e.preventDefault()
     setAddNewMovie({ title: newMovie, genre: genres[Math.floor(Math.random() * genres.length)] })
     setMovieList([...movieList, addNewMovie])
+    movies.push(addNewMovie)
   }
 
   return (

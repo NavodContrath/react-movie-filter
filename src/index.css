@@ -1,0 +1,71 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background-color: #303030;
+}
+/* display region*/
+.container{
+    width: 100%;
+    max-width: 976px;
+    margin: auto;
+    padding: 2rem;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.col-4{
+    width: calc(100% / 12 * 4);
+}
+.card{
+    margin-top: 1rem;
+    padding: 1rem;
+}
+.card-head{
+    border-bottom: 1px solid black;
+    padding: 1rem;
+    text-align: center;
+    background-color: #0282f9;
+    color: gold;
+}
+.card-body{
+    background-color: black;
+    color: white;
+}
+img{
+    width: 100%;
+    height: 300px;
+}
+.p-1{
+    padding: 0.25rem;
+}
+.text-center{
+    text-align: center;
+}
+/* forms and input region */
+.genre-container{
+    margin: 1rem;
+    label{
+        color: white;
+        margin-right: 1rem;
+    }
+    select{
+        padding: 0.5rem;
+        font-weight: bold;
+        border:2px solid black;
+    }
+}
+.tool-container{
+    margin: 1rem;
+    #movie-title{
+        margin-bottom: 1rem;
+    }
+    button{
+        font-weight: bold;  
+    }
+}
+      

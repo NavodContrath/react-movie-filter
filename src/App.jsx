@@ -7,23 +7,21 @@ function App() {
   const [movieName, setMovieName] = useState('')
   const [newMovie, setNewMovie] = useState('')
   const [newGenre, setNewGenre] = useState('')
-  const [addNewMovie, setAddNewMovie] = useState('')
   const [movieList, setMovieList] = useState(movies)
-  const genres = [...new Set(movies.map(movie => movie.genre))]
+  const genres = ["All", ...new Set(movies.map(movie => movie.genre))]
 
   useEffect(() => {
-    setMovieList(movies.filter(movie => movie.genre.toLowerCase().includes(movieGenre.toLowerCase())))
-  }, [movieGenre])
-
-  useEffect(() => {
-    setMovieList(movies.filter(movie => movie.title.toLowerCase().includes(movieName.toLowerCase())))
-  }, [movieName])
+    setMovieList(movies.filter(movie =>
+      movie.genre.toLowerCase().includes(movieGenre.toLowerCase()) &&
+      movie.title.toLowerCase().includes(movieName.toLowerCase())))
+  }, [movieGenre, movieName])
 
   function newMovieHandler(e) {
     e.preventDefault()
-    setAddNewMovie({ title: newMovie, genre: newGenre })
-    setMovieList([...movieList, addNewMovie])
-    movies.push(addNewMovie)
+    const newMovieObj = { title: newMovie, genre: newGenre }
+    setMovieList([...movieList, newMovieObj])
+    console.log("submitted!")
+    movies.push(newMovieObj)
   }
   return (
     <div className='container'>
@@ -45,28 +43,23 @@ function App() {
       <select name='movies-genre' id="movies-genre" onChange={e => setMovieGenre(e.target.value)}>
         {
           genres.map((genre, i) => {
-
             return (
               <option key={i} value={genre}>{genre}</option>
             )
-
           })
-
         }
       </select>
       <div>
         <input type="text" name="movie-title" id="movie-title" placeholder='search-bar' onChange={e => setMovieName(e.target.value)} />
         <form onSubmit={e => newMovieHandler(e)} >
           <input type="text" name="movie" id="movie" placeholder='add a new movie' onChange={e => setNewMovie(e.target.value)} />
-          <select name='movies-genre' id="movies-genre" onChange={e => setNewGenre(e.target.value)}>
+          <select name='movie-genre' id="movie-genre" onChange={e => setNewGenre(e.target.value)}>
             {
               genres.map((genre, i) => {
                 return (
                   <option key={i} value={genre}>{genre}</option>
                 )
-
               })
-
             }
           </select>
           <button type="submit">submit</button>

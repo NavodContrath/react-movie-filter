@@ -4,6 +4,7 @@ import movies from './data/movies'
 
 function App() {
   const [movieGenre, setMovieGenre] = useState('')
+  const [movieName, setMovieName] = useState('')
   const [movieList, setMovieList] = useState(movies)
   const genres = [...new Set(movies.map(movie => movie.genre))]
 
@@ -11,7 +12,9 @@ function App() {
     setMovieList(movies.filter(movie => movie.genre.toLowerCase().includes(movieGenre.toLowerCase())))
   }, [movieGenre])
 
-
+  useEffect(() => {
+    setMovieList(movies.filter(movie => movie.title.toLowerCase().includes(movieName.toLowerCase())))
+  }, [movieName])
 
   return (
     <div className='container'>
@@ -43,6 +46,11 @@ function App() {
 
         }
       </select>
+      <div>
+
+        <input type="text" name="movie-title" id="movie-title" onChange={e => setMovieName(e.target.value)} />
+
+      </div>
     </div>
   )
 }

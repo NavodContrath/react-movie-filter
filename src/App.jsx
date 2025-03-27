@@ -4,6 +4,10 @@ import movies from './data/movies'
 
 function App() {
   const [movieList, setMovieList] = useState(movies)
+  const genres = [...new Set(movieList.map(movie => movie.genre))]
+  function eventHandler(e) {
+    e.preventdefault()
+  }
 
 
 
@@ -24,21 +28,21 @@ function App() {
           )
         })
       }
-      <form>
+      <form onSubmit={(e) => eventHandler(e)}>
         <label htmlFor="genres">chose a genre</label>
         <select name='movies-genre' id="movies-genre">
           {
-            movieList.map((movie, i) => {
+            genres.map((genre, i) => {
+
               return (
-                <option key={i} value={movie.genre}>{movie.genre}</option>
+                <option key={i} value={genre}>{genre}</option>
               )
+
             })
 
           }
         </select>
-        <input type="submit" value="Submit" />
-
-
+        <button type="submit">Submit</button>
       </form>
 
     </div>

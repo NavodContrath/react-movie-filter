@@ -6,6 +6,7 @@ function App() {
   const [movieGenre, setMovieGenre] = useState('')
   const [movieName, setMovieName] = useState('')
   const [newMovie, setNewMovie] = useState('')
+  const [newGenre, setNewGenre] = useState('')
   const [addNewMovie, setAddNewMovie] = useState('')
   const [movieList, setMovieList] = useState(movies)
   const genres = [...new Set(movies.map(movie => movie.genre))]
@@ -20,16 +21,14 @@ function App() {
 
   function newMovieHandler(e) {
     e.preventDefault()
-    setAddNewMovie({ title: newMovie, genre: genres[Math.floor(Math.random() * genres.length)] })
+    setAddNewMovie({ title: newMovie, genre: newGenre })
     setMovieList([...movieList, addNewMovie])
     movies.push(addNewMovie)
   }
-
   return (
     <div className='container'>
       {
         movieList.map((movie, i) => {
-
           return (
             <div key={`movie-${i}`}>
               <div>
@@ -56,13 +55,22 @@ function App() {
         }
       </select>
       <div>
-
         <input type="text" name="movie-title" id="movie-title" placeholder='search-bar' onChange={e => setMovieName(e.target.value)} />
         <form onSubmit={e => newMovieHandler(e)} >
           <input type="text" name="movie" id="movie" placeholder='add a new movie' onChange={e => setNewMovie(e.target.value)} />
+          <select name='movies-genre' id="movies-genre" onChange={e => setNewGenre(e.target.value)}>
+            {
+              genres.map((genre, i) => {
+                return (
+                  <option key={i} value={genre}>{genre}</option>
+                )
+
+              })
+
+            }
+          </select>
           <button type="submit">submit</button>
         </form>
-
       </div>
     </div>
   )

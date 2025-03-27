@@ -5,6 +5,8 @@ import movies from './data/movies'
 function App() {
   const [movieGenre, setMovieGenre] = useState('')
   const [movieName, setMovieName] = useState('')
+  const [newMovie, setNewMovie] = useState('')
+  const [addNewMovie, setAddNewMovie] = useState('')
   const [movieList, setMovieList] = useState(movies)
   const genres = [...new Set(movies.map(movie => movie.genre))]
 
@@ -15,6 +17,12 @@ function App() {
   useEffect(() => {
     setMovieList(movies.filter(movie => movie.title.toLowerCase().includes(movieName.toLowerCase())))
   }, [movieName])
+
+  function newMovieHandler(e) {
+    e.preventDefault()
+    setAddNewMovie({ title: newMovie, genre: genres[Math.floor(Math.random() * genres.length)] })
+    setMovieList([...movieList, addNewMovie])
+  }
 
   return (
     <div className='container'>
@@ -48,7 +56,11 @@ function App() {
       </select>
       <div>
 
-        <input type="text" name="movie-title" id="movie-title" onChange={e => setMovieName(e.target.value)} />
+        <input type="text" name="movie-title" id="movie-title" placeholder='search-bar' onChange={e => setMovieName(e.target.value)} />
+        <form onSubmit={e => newMovieHandler(e)} >
+          <input type="text" name="movie" id="movie" placeholder='add a new movie' onChange={e => setNewMovie(e.target.value)} />
+          <button type="submit">submit</button>
+        </form>
 
       </div>
     </div>

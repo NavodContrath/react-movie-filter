@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import movies from './data/movies'
 
 
 function App() {
+  const [movieGenre, setMovieGenre] = useState('')
   const [movieList, setMovieList] = useState(movies)
-  const genres = [...new Set(movieList.map(movie => movie.genre))]
-  function eventHandler(e) {
-    e.preventdefault()
-  }
+  const genres = [...new Set(movies.map(movie => movie.genre))]
+
+  useEffect(() => {
+    setMovieList(movies.filter(movie => movie.genre.toLowerCase().includes(movieGenre.toLowerCase())))
+  }, [movieGenre])
 
 
 
@@ -15,6 +17,7 @@ function App() {
     <div className='container'>
       {
         movieList.map((movie, i) => {
+
           return (
             <div key={`movie-${i}`}>
               <div>
@@ -24,27 +27,22 @@ function App() {
                 {movie.genre}
               </div>
             </div>
-
           )
         })
       }
-      <form onSubmit={(e) => eventHandler(e)}>
-        <label htmlFor="genres">chose a genre</label>
-        <select name='movies-genre' id="movies-genre">
-          {
-            genres.map((genre, i) => {
+      <label htmlFor="genres">chose a genre</label>
+      <select name='movies-genre' id="movies-genre" onChange={e => setMovieGenre(e.target.value)}>
+        {
+          genres.map((genre, i) => {
 
-              return (
-                <option key={i} value={genre}>{genre}</option>
-              )
+            return (
+              <option key={i} value={genre}>{genre}</option>
+            )
 
-            })
+          })
 
-          }
-        </select>
-        <button type="submit">Submit</button>
-      </form>
-
+        }
+      </select>
     </div>
   )
 }

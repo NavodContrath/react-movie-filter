@@ -18,7 +18,7 @@ function App() {
         movie.genre.toLowerCase().includes(movieGenre.toLowerCase())
       );
     }
-    if (movieName) {
+    else if (movieName) {
       filteredMovies = filteredMovies.filter((movie) =>
         movie.title.toLowerCase().includes(movieName.toLowerCase())
       );
@@ -28,6 +28,10 @@ function App() {
 
   function newMovieHandler(e) {
     e.preventDefault()
+    console.log(newGenre)
+    if (!newGenre) {
+      return alert("Choose a valid genre")
+    }
     const newMovieObj = { title: newMovie, genre: newGenre }
     setMovieList([...movieList, newMovieObj])
     console.log("submitted!")
@@ -52,8 +56,8 @@ function App() {
       <div className='tool-container'>
         <input type="text" name="movie-title" id="movie-title" className="p-1 text-center" placeholder='search-bar' onChange={e => setMovieName(e.target.value)} />
         <form onSubmit={e => newMovieHandler(e)} >
-          <input type="text" name="movie" id="movie" className="p-1 text-center" placeholder='add a new movie' value={newMovie} onChange={e => setNewMovie(e.target.value)} />
-          <select name='movie-genre' id="movie-genre" className="p-1 text-center" value={newGenre} onChange={e => setNewGenre(e.target.value)}>
+          <input type="text" name="movie" id="movie" className="p-1 text-center" placeholder='add a new movie' value={newMovie} onChange={e => setNewMovie(e.target.value)} required />
+          <select name='movie-genre' id="movie-genre" className="p-1 text-center" value="All" onChange={e => setNewGenre(e.target.value)} required>
             {
               genres.map((genre, i) => {
                 return (

@@ -8,12 +8,22 @@ function App() {
   const [newMovie, setNewMovie] = useState('')
   const [newGenre, setNewGenre] = useState('')
   const [movieList, setMovieList] = useState(movies)
+
   const genres = ["All", ...new Set(movies.map(movie => movie.genre))]
 
   useEffect(() => {
-    setMovieList(movies.filter(movie =>
-      movie.genre.toLowerCase().includes(movieGenre.toLowerCase()) &&
-      movie.title.toLowerCase().includes(movieName.toLowerCase())))
+    let filteredMovies = movies;
+    if (movieGenre !== "All") {
+      filteredMovies = filteredMovies.filter((movie) =>
+        movie.genre.toLowerCase().includes(movieGenre.toLowerCase())
+      );
+    }
+    if (movieName) {
+      filteredMovies = filteredMovies.filter((movie) =>
+        movie.title.toLowerCase().includes(movieName.toLowerCase())
+      );
+    }
+    setMovieList(filteredMovies)
   }, [movieGenre, movieName])
 
   function newMovieHandler(e) {
@@ -21,6 +31,8 @@ function App() {
     const newMovieObj = { title: newMovie, genre: newGenre }
     setMovieList([...movieList, newMovieObj])
     console.log("submitted!")
+    setNewMovie("");
+    setNewGenre("")
     movies.push(newMovieObj)
   }
   return (
@@ -40,8 +52,8 @@ function App() {
       <div className='tool-container'>
         <input type="text" name="movie-title" id="movie-title" className="p-1 text-center" placeholder='search-bar' onChange={e => setMovieName(e.target.value)} />
         <form onSubmit={e => newMovieHandler(e)} >
-          <input type="text" name="movie" id="movie" className="p-1 text-center" placeholder='add a new movie' onChange={e => setNewMovie(e.target.value)} />
-          <select name='movie-genre' id="movie-genre" className="p-1 text-center" onChange={e => setNewGenre(e.target.value)}>
+          <input type="text" name="movie" id="movie" className="p-1 text-center" placeholder='add a new movie' value={newMovie} onChange={e => setNewMovie(e.target.value)} />
+          <select name='movie-genre' id="movie-genre" className="p-1 text-center" value={newGenre} onChange={e => setNewGenre(e.target.value)}>
             {
               genres.map((genre, i) => {
                 return (

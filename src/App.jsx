@@ -58,7 +58,7 @@ function App() {
         <input type="text" name="movie-title" id="movie-title" className="p-1 text-center" placeholder='search-bar' onChange={e => setMovieName(e.target.value)} />
         <form onSubmit={e => newMovieHandler(e)} >
           <input type="text" name="movie" id="movie" className="p-1 text-center" placeholder='add a new movie' value={newMovie} onChange={e => setNewMovie(e.target.value)} required />
-          <select name='movie-genre' id="movie-genre" className="p-1 text-center" value="All" onChange={e => setNewGenre(e.target.value)} required>
+          <select name='movie-genre' id="movie-genre" className="p-1 text-center" onChange={e => setNewGenre(e.target.value)} required>
             {
               genres.map((genre, i) => {
                 return (

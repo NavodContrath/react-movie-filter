@@ -18,7 +18,7 @@ function App() {
         movie.genre.toLowerCase().includes(movieGenre.toLowerCase())
       );
     }
-    else if (movieName) {
+    if (movieName) {
       filteredMovies = filteredMovies.filter((movie) =>
         movie.title.toLowerCase().includes(movieName.toLowerCase())
       );

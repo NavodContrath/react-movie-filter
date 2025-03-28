@@ -7,7 +7,7 @@
 body{
     background-color: #303030;
 }
-/* display region*/
+/* utilities region*/
 .container{
     width: 100%;
     max-width: 976px;
@@ -32,9 +32,9 @@ body{
     background-color: #0282f9;
     color: gold;
 }
-.card-body{
-    background-color: black;
-    color: white;
+.card-genre{
+    background-color: gold;
+    color: black;
 }
 img{
     width: 100%;
@@ -46,7 +46,7 @@ img{
 .text-center{
     text-align: center;
 }
-/* forms and input region */
+/* css region */
 .genre-container{
     margin: 1rem;
     label{
@@ -67,5 +67,14 @@ img{
     button{
         font-weight: bold;  
     }
+}
+.displayer{
+    border: 1px solid white;
+    background-color: black;
+}
+.title{
+    margin:2rem 0 3rem 0;
+    color: white;
+    text-decoration: underline;
 }
       

@@ -41,6 +41,7 @@ function App() {
   }
   return (
     <div className='container'>
+      <h1 className='title text-center'>Boolean Cinema</h1>
       <div className='genre-container'>
         <label htmlFor="genres">chose a genre</label>
         <select name='movies-genre' id="movies-genre" className="text-center" onChange={e => setMovieGenre(e.target.value)}>
@@ -79,7 +80,7 @@ function App() {
                   {movie.title}
                 </div>
                 <div className="card-body">
-                  {movie.genre}
+                  <div className='card-genre'>{movie.genre}</div>
                   <img src={`${movie.img}`} alt="" />
                 </div>
               </div>
